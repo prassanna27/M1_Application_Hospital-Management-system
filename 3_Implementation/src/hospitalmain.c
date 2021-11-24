@@ -1,10 +1,63 @@
+//HEADER FILES
+#include<stdio.h>//Use for standard I/O Operation
+#include<windows.h>
+#include<conio.h>//Use for delay(),getch(),gotoxy(),etc.
+#include<ctype.h>//se for toupper(), tolower(),etc
+#include<string.h>//Use for strcmp(),strcpy(),strlen(),etc
+#include<stdlib.h>
 
-#include<hms.h>
+char ans=0; 
+int ok;
+int b, valid=0;
+//FUNCTION DECLERATION
+void WelcomeScreen(void);//WelcomeScreen function decleration
+void Title(void);//Title function decleration
+void MainMenu(void);//MainMenu function decleration
+void LoginScreen(void);//LoginScreen function decleration
+void Add_rec(void);//Add_rec function declaration
+void func_list();//function to list the patient details 
+void Search_rec(void);//Search_rec function declaration
+void Edit_rec(void);//Edit_rec function declaration
+void Dlt_rec(void);//Dlt_rec function declaration
+void ex_it(void);//exit function declaration
+//Defines gotoxy() for ANSI C compilers.
+void gotoxy(short x, short y) {
+COORD pos = {x, y};//sets co-ordinates in (x,y).
+SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
+}
 
+struct patient//list of global variable
+{
+	int age;
+	char Gender;
+	char First_Name[20];
+	char Last_Name[20]; 
+	char Contact_no[15];
+	char Address[30];
+	char Email[30];
+	char Doctor[20];
+	char Problem[20];
+};
+
+struct patient  p,temp_c;
+
+
+
+main(void)
+{
+	
+    WelcomeScreen();//Use to call WelcomeScreen function
+	Title();//Use to call Title function
+	LoginScreen();//Use to call Menu function
+	
+	
+	
+
+}
 /* ************************************************* Welcome Screen ********************************************* */
 void WelcomeScreen(void) //function for welcome screen
 {
-
+	
 	printf("\n\n\n\n\n\n\n\t\t\t\t#########################################");
 	printf("\n\t\t\t\t#\t\t WELCOME TO\t\t#");
 	printf("\n\t\t\t\t#   AMBAR HOSPITAL MANAGEMENT SYSTEM    #");
@@ -12,7 +65,7 @@ void WelcomeScreen(void) //function for welcome screen
 	printf("\n\n\n\n\n Press any key to continue......\n");
 	getch();//Use to holds screen for some seconds
 	system("cls");//Use to clear screen
-
+	
 }
 /* ************************************************* Title Screen ********************************************* */
 void Title(void)//function for title screen
@@ -35,10 +88,10 @@ void MainMenu(void)//function decleration
 	printf("\n\t\t\t\t6. Exit\n");
 	printf("\n\n\n \n\t\t\t\tChoose from 1 to 6:");
 	scanf("%i", &choose);
-
+	
 	switch(choose)//switch to differeht case
 	{
-
+	
 	case 1:
 	Add_rec();//Add_rec function is called
     	break;
@@ -62,8 +115,8 @@ void MainMenu(void)//function decleration
 		printf("\t\t\tInvalid entry. Please enter right option :)");
 		getch();//holds screen
 	}//end of switch
-
-
+		
+	
 }
 /* ************************************************* Exit Screen ********************************************* */
 void ex_it(void)//function to exit
@@ -72,12 +125,12 @@ void ex_it(void)//function to exit
 	Title();// call Title function
 	printf("\n\n\n\n\n\t\t\tTHANK YOU FOR VISITING :)");
 	getch();//holds screen
-
+	
 }
 /* ************************************************* Login Screen ********************************************* */
 void LoginScreen(void)//function for login screen
 {
-//list of variables
+//list of variables	
 int e=0	;
 char Username[15];
 char Password[15];
@@ -89,15 +142,15 @@ do
 	printf("\n\n\n\n\t\t\t\tEnter your Username and Password :)");
 	printf("\n\n\n\t\t\t\t\tUSERNAME:");
 	scanf("%s",&Username);
-
+	
 	printf("\n\n\t\t\t\t\tPASSWORD:");
 	scanf("%s",&Password);
-
+	
 	if (strcmp(Username,original_Username)==0 && strcmp(Password,original_Password)==0)
 	{
 		printf("\n\n\n\t\t\t\t\t...Login Successfull...");
-
-
+		
+		
 		getch();
 		MainMenu();//call MainMenu function
 		break;
@@ -117,7 +170,7 @@ while(e<=2);
 	getch();
     ex_it();
 	}
-
+ 
 system("cls");
 }
 
@@ -134,7 +187,7 @@ void Add_rec(void)
 	FILE*ek;//file pointer
 	ek=fopen("Record2.dat","a");//open file in write mode
 	printf("\n\n\t\t\t!!!!!!!!!!!!!! Add Patients Record !!!!!!!!!!!!!\n");
-
+	
 	/* **************************First Name*********************************** */
 	A:
 	printf("\n\t\t\tFirst Name: ");
@@ -165,7 +218,7 @@ void Add_rec(void)
 			goto A;
 		}
 	}
-
+	
 	/* ********************************************** Last name ************************************************ */
 	B:
 	printf("\n\t\t\tLast Name: ");
@@ -196,7 +249,7 @@ void Add_rec(void)
 			goto B;
 		}
 	}
-/* ******************************************* Gender ************************************************************** */
+/* ******************************************* Gender ************************************************************** */	    
 	do
 	{
 	    printf("\n\t\t\tGender[F/M]: ");
@@ -205,7 +258,7 @@ void Add_rec(void)
 		{
 			ok =1;
 		}
-		else
+		else 
 		{
 		ok =0;
 		}
@@ -214,10 +267,10 @@ void Add_rec(void)
 	    	printf("\n\t\t Gender contain Invalid character :(  Enter either F or M :)");
     	}
 	 }	while(!ok);
-/* ***************************************** Age ********************************************************************** */
+/* ***************************************** Age ********************************************************************** */	
     printf("\n\t\t\tAge:");
     scanf(" %i",&p.age);
-/* **************************************** Address ******************************************************************* */
+/* **************************************** Address ******************************************************************* */    
     do
     {
     C:
@@ -229,7 +282,7 @@ void Add_rec(void)
 		printf("\n\t Invalid :( \t The max range for address is 20 and min range is 4 :)");
 		goto C;
 	}
-
+	
 }while(!valid);
 /* ******************************************* Contact no. ***************************************** */
 do
@@ -270,7 +323,7 @@ do
     scanf("%s",p.Email);
     if (strlen(p.Email)>30||strlen(p.Email)<8)
     {
-       printf("\n\t Invalid :( \t The max range for email is 30 and min range is 8 :)");
+       printf("\n\t Invalid :( \t The max range for email is 30 and min range is 8 :)");	
 	}
 }while(strlen(p.Email)>30||strlen(p.Email)<8);
 /* ********************************************************* Problem *********************************************** */
@@ -303,7 +356,7 @@ do
 			goto E;
 		}
 	}
-/* ********************************************** Prescribed Doctor **************************************** */
+/* ********************************************** Prescribed Doctor **************************************** */	
 	F:
     printf("\n\t\t\tPrescribed Doctor:");
     scanf("%s",p.Doctor);
@@ -333,7 +386,7 @@ do
 			goto F;
 		}
 	}
-
+    
     fprintf(ek," %s %s %c %i %s %s %s %s %s\n", p.First_Name, p.Last_Name, p.Gender, p.age, p.Address, p.Contact_no, p.Email, p.Problem, p.Doctor);
     printf("\n\n\t\t\t.... Information Record Successful ...");
     fclose(ek);//ek file is closed
@@ -384,7 +437,7 @@ void func_list()
 		printf("Prescribed Doctor\n");
 		printf("=================================================================================================================");
 		row=17;
-		while(fscanf(ek,"%s %s %c %i %s %s %s %s %s\n", p.First_Name, p.Last_Name,
+		while(fscanf(ek,"%s %s %c %i %s %s %s %s %s\n", p.First_Name, p.Last_Name, 
 					&p.Gender, &p.age, p.Address, p.Contact_no, p.Email, p.Problem, p.Doctor)!=EOF)
 		{
 			gotoxy(1,row);
@@ -515,7 +568,7 @@ void Edit_rec(void)
 	   	fflush(stdin);
 	   	name[0]=toupper(name[0]);
 		gotoxy(12,15);
-
+		
 		if(ft==NULL)
 		{
 			printf("\n Can not open file");
@@ -531,9 +584,9 @@ void Edit_rec(void)
 				printf("*** Existing Record ***");
 				gotoxy(10,19);
 				printf("%s \t%s \t%c \t%i \t%s \t%s \t%s \t%s \t%s\n",p.First_Name,p.Last_Name,p.Gender, p.age,p.Address,p.Contact_no,p.Email,p.Problem,p.Doctor);
-				gotoxy(12,22);
+				gotoxy(12,22);	
 				printf("Enter New First Name: ");
-				scanf("%s",p.First_Name);
+				scanf("%s",p.First_Name);    
 				gotoxy(12,24);
 				printf("Enter Last Name: ");
 				scanf("%s",p.Last_Name);
@@ -568,11 +621,11 @@ void Edit_rec(void)
 				{
 				fprintf(ft,"%s %s %c %i %s %s %s %s %s\n",p.First_Name,p.Last_Name,p.Gender, p.age,p.Address,p.Contact_no,p.Email,p.Problem,p.Doctor);
 				printf("\n\n\t\t\tPatient record updated successfully...");
-				}
+				}					
 			}
 			else
 			{
-			fprintf(ft,"%s %s %c %i %s %s %s %s %s\n",p.First_Name,p.Last_Name,p.Gender, p.age,p.Address,p.Contact_no,p.Email,p.Problem,p.Doctor);
+			fprintf(ft,"%s %s %c %i %s %s %s %s %s\n",p.First_Name,p.Last_Name,p.Gender, p.age,p.Address,p.Contact_no,p.Email,p.Problem,p.Doctor);	
 			}
 		 }
 		 if(!valid) printf("\n\t\tNO RECORD FOUND...");
@@ -581,7 +634,7 @@ void Edit_rec(void)
 	   remove("Record2.dat");
    	   rename("temp2.dat","Record2.dat");
 		getch();
-		MainMenu();
+		MainMenu();		
 }
 void Dlt_rec()
 {
@@ -598,13 +651,13 @@ void Dlt_rec()
 	fflush(stdin);
 	gets(name);
 	name[0]=toupper(name[0]);
-
+	
 	while (fscanf(ek,"%s %s %c %i %s %s %s %s %s", p.First_Name, p.Last_Name, &p.Gender,
 			 &p.age, p.Address, p.Contact_no, p.Email, p.Problem, p.Doctor)!=EOF)
 	{
 		if (strcmp(p.First_Name,name)!=0)
 		fprintf(ft,"%s %s %c %i %s %s %s %s %s\n", p.First_Name, p.Last_Name, p.Gender, p.age, p.Address, p.Contact_no, p.Email, p.Problem, p.Doctor);
-		else
+		else 
 		{
 			printf("%s %s %c %i %s %s %s %s %s\n", p.First_Name, p.Last_Name, p.Gender, p.age, p.Address, p.Contact_no, p.Email, p.Problem, p.Doctor);
 			found=1;
@@ -626,4 +679,5 @@ void Dlt_rec()
 		getch();
 		MainMenu();
 	}
-}
+} 
+
