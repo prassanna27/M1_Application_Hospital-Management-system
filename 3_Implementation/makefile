@@ -76,22 +76,6 @@ test:$(BUILD)
 	gcc $(TEST_SRC) $(INC) -o $(TEST_OUTPUT) $(INCLUDE_LIBS)
 	./$(TEST_OUTPUT)
 
-analyze: test memcheck staticcheck coverage sanitize_check
-
-staticcheck:
-	cppcheck --enable=all -iunity .
-
-memcheck:
-	valgrind ./$(TEST_OUTPUT)
-
-sanitize_check:
-	gcc -fsanitize=address -fno-omit-frame-pointer $(TEST_SRC) $(INC) -o $(TEST_OUTPUT) $(INCLUDE_LIBS)
-	./$(TEST_OUTPUT)
-
-coverage:$(TEST_SRC)
-	gcc -fprofile-arcs -ftest-coverage $(TEST_SRC) $(INC) -o $(TEST_OUTPUT) $(INCLUDE_LIBS)
-	./$(TEST_OUTPUT)
-	gcov -a contact_management.c
 
 # Remove all the built files, invoke by `make clean`
 clean:
